@@ -1,0 +1,8 @@
+Ruby Style
+
+- your text editor's tab function should be set to 2 spaces and indenting should be set
+  to use spaces
+
+- when you see the # sign at the beginning of a line, that means anything after it, on the
+  same line, is a comment
+
