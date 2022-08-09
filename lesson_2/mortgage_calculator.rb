@@ -1,6 +1,6 @@
 # Initializations
 def calculate_payment(loan_amount, j, n)
-  m = loan_amount * (j / (1 - (1 + j)**(-n)))
+  loan_amount * (j / (1 - (1 + j)**(-n)))
 end
 
 def prompt(message)
@@ -16,7 +16,7 @@ def float?(number)
 end
 
 def apr_to_monthly(apr)
-  apr = apr / 100
+  apr /= 100
   apr / 12
 end
 
@@ -29,15 +29,12 @@ apr = nil
 loan_duration = nil
 another_one = true
 
-
-
-
 # Functionality
 loop do
   loop do
     prompt "Please enter your loan amount"
     loan_amount = gets.chomp
-    break if integer?(loan_amount) && loan_amount.to_i > 0
+    break if integer?(loan_amount) && loan_amount.to_i > 0 && !loan_amount.empty?
     prompt "Please enter a valid number"
   end
   loan_amount = loan_amount.to_i
@@ -45,7 +42,7 @@ loop do
   loop do
     prompt "Please enter your Annual Percentage Rate (APR)"
     apr = gets.chomp
-    break if float?(apr) && apr.to_f > 0
+    break if float?(apr) && apr.to_f > 0 && !apr.empty?
     prompt "Please enter a valid APR."
     prompt "\nUse a decimal even if not needed"
   end
@@ -54,7 +51,7 @@ loop do
   loop do
     prompt "Please enter the duration of your loan"
     loan_duration = gets.chomp
-    break if integer?(loan_duration) && loan_duration.to_i > 0
+    break if integer?(loan_duration) && loan_duration.to_i > 0&& !loan_duration.empty?
     prompt "Please enter a valid number"
   end
   loan_duration = loan_duration.to_i
@@ -62,7 +59,8 @@ loop do
   monthly_interest_rate = apr_to_monthly(apr)
   loan_in_months = years_to_months(loan_duration)
 
-  monthly_payment = calculate_payment(loan_amount, monthly_interest_rate, loan_in_months)
+  monthly_payment =
+    calculate_payment(loan_amount, monthly_interest_rate, loan_in_months)
 
   prompt "Your monthly payment would be $#{monthly_payment.truncate(2)}."
 
@@ -80,5 +78,3 @@ loop do
 end
 
 prompt "\nThank you for interacting with me!"
-
-
