@@ -33,6 +33,7 @@ loop do
     puts "Invalid input! Make sure you enter two integers"
   end
 
+  # Get Operator Input from User
   loop do
     puts "\nPlease enter your desired operation:"
     operation = gets.chomp
@@ -42,7 +43,7 @@ loop do
     puts "Invalid input! Please enter +, -, *, /, or %"
   end
 
-
+  # Perform Operation
   case operation
     when "+"  then puts converted_number_1 + converted_number_2
     when "-"  then puts converted_number_1 - converted_number_2
