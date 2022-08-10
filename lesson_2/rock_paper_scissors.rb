@@ -8,17 +8,13 @@ def check_user_choice(user)
 end
 
 def winner_check(user, computer)
-  if user == 'rock' && computer == 'paper'
+  if (user == 'rock' && computer == 'paper') ||
+      (user == 'paper' && computer == 'scissors') ||
+      (user == 'scissors' && computer == 'rock')
     'The computer won!'
-  elsif user == 'rock' && computer == 'scissors'
-    'You won!'
-  elsif user == 'paper' && computer == 'rock'
-    'You won!'
-  elsif user == 'paper' && computer == 'scissors'
-    'The computer won!'
-  elsif user == 'scissors' && computer == 'rock'
-    'The computer won!'
-  elsif user == 'scissors' && computer == 'paper'
+  elsif (user == 'rock' && computer == 'scissors') ||
+        (user == 'paper' && computer == 'rock') ||
+        (user == 'scissors' && computer == 'paper')
     'You won!'
   else
     'You tied!'
@@ -26,6 +22,7 @@ def winner_check(user, computer)
 end
 
 loop do
+  # User Choice
   user_choice = nil
   loop do
     prompt "Choose one: #{VALID_CHOICES.join(", ")}"
@@ -34,12 +31,15 @@ loop do
     prompt "Please enter a valid input"
   end
 
+  # Computer Choice
   prompt "Computer is thinking..."
   sleep 2
   prompt "Thinking..."
   sleep 1.5
 
   computer_choice = VALID_CHOICES.sample
+
+  # Check the Winner
   prompt "You chose #{user_choice}."
   sleep 1.5
   prompt "The computer chose..."
@@ -48,6 +48,7 @@ loop do
   sleep 1.5
   prompt winner_check(user_choice, computer_choice).to_s
 
+  # Play Again?
   sleep 1.5
   play_again = true
   loop do
