@@ -13,6 +13,15 @@ def win?(first, second)
     (first == 'scissors' && second == 'rock')
 end
 
+def convert_input(input)
+  case input
+  when 'r' then 'rock'
+  when 'p' then 'paper'
+  when 's' then 'scissors'
+  else input
+  end
+end
+
 def display_result(user, computer)
   if win?(user, computer)
     'The computer won!'
@@ -23,13 +32,21 @@ def display_result(user, computer)
   end
 end
 
+
+# Gameplay Loop
+computer_score = 0
+user_score = 0
+prompt "Rock, Paper, Scissors!! First to 3 wins.  Get ready..."
+
 loop do
   # User Choice
+  sleep 1.5
   user_choice = nil
   loop do
     prompt "Choose one: #{VALID_CHOICES.join(', ')}"
     user_choice = gets.chomp.downcase
-    break if check_user_choice(user_choice)
+    user_choice = convert_input(user_choice)
+    break if VALID_CHOICES.include?(user_choice)
     prompt "Please enter a valid input"
   end
 
@@ -48,25 +65,18 @@ loop do
   sleep 1.5
   prompt computer_choice.to_s
   sleep 1.5
-  prompt display_result(user_choice, computer_choice)
+  result = display_result(user_choice, computer_choice)
+  prompt result
 
-  # Play Again?
-  sleep 1.5
-  play_again = true
-  loop do
-    prompt "Do you want to play again? (y/n)"
-    response = gets.chomp.downcase
-    case response
-    when 'n'
-      play_again = false
-      break
-    when 'y'
-      break
-    end
-    prompt "Please enter 'y' or 'n'"
+  # Increment and Display Score
+  if result.include?('computer')
+    computer_score += 1
+  elsif result == 'You won!'
+    user_score += 1
   end
+  prompt "The score is: You: #{user_score} Computer: #{computer_score}"
 
-  break if play_again == false
+  break if user_score == 3 || computer_score == 3
 end
 
 prompt "Thanks for playing!"
