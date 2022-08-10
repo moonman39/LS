@@ -7,14 +7,16 @@ def check_user_choice(user)
   VALID_CHOICES.include?(user)
 end
 
+def win?(first, second)
+  (first == 'rock' && second == 'paper') ||
+      (first == 'paper' && second == 'scissors') ||
+      (first == 'scissors' && second == 'rock')
+end
+
 def display_result(user, computer)
-  if (user == 'rock' && computer == 'paper') ||
-      (user == 'paper' && computer == 'scissors') ||
-      (user == 'scissors' && computer == 'rock')
+  if win?(user, computer)
     'The computer won!'
-  elsif (user == 'rock' && computer == 'scissors') ||
-        (user == 'paper' && computer == 'rock') ||
-        (user == 'scissors' && computer == 'paper')
+  elsif win?(computer, user)
     'You won!'
   else
     'You tied!'
