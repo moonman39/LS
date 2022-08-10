@@ -1,0 +1,12 @@
+What is Object Passing?
+  - in Ruby, almost everything is an object
+  - when you call a method with some expression as an argument, that expression
+    is evaluated by ruby and reduced, ultimately, to an object
+    - the expression can be an object literal, a variable name, or a complex
+      expression; regardless, it is reduced to an object
+    - Ruby then makes that object available inside the method
+      - this is called object passing
+  
+  - in addition to method arguments, the caller (sometimes called the receiver)
+    of a method call - the object on which the method is called - can be thought
+    of as an implied argument
