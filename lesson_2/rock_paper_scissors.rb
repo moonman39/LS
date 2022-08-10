@@ -2,12 +2,9 @@ def prompt(message)
   puts "\n=> #{message}"
 end
 
+VALID_CHOICES = %w(rock paper scissors)
 def check_user_choice(user)
-  %w(rock paper scissors).include?(user)
-end
-
-def random_computer_choice
-  %w(rock paper scissors).sample
+  VALID_CHOICES.include?(user)
 end
 
 def winner_check(user, computer)
@@ -31,7 +28,7 @@ end
 loop do
   user_choice = nil
   loop do
-    prompt "Do you choose rock, paper, or scissors?"
+    prompt "Choose one: #{VALID_CHOICES.join(", ")}"
     user_choice = gets.chomp.downcase
     break if check_user_choice(user_choice)
     prompt "Please enter a valid input"
@@ -42,7 +39,7 @@ loop do
   prompt "Thinking..."
   sleep 1.5
 
-  computer_choice = random_computer_choice
+  computer_choice = VALID_CHOICES.sample
   prompt "You chose #{user_choice}."
   sleep 1.5
   prompt "The computer chose..."

@@ -10,3 +10,76 @@ What is Object Passing?
   - in addition to method arguments, the caller (sometimes called the receiver)
     of a method call - the object on which the method is called - can be thought
     of as an implied argument
+
+
+
+Why is the Object Passing Strategy Important?
+  - most computer languages that employ strict evaluation use pass by value by
+    default
+    - few languages are purely pass by value or pass by reference
+  
+  - if the method does something that appears to change the object, is that change
+    local to the method, or does it mutate the original object
+
+
+
+Pass by Value
+  - with pass by value, a copy of an object is created, and it is that copy that
+    gets passed around
+    - since it is merely a copy, it is impossible to change the original object
+      - any attempt to change the copy just changes the copy and leaves the original 
+  
+  - passing around immutable values in rub acts a lot like pass by value:
+
+    def plus(x, y)
+      x = x + y
+    end
+
+    a = 3
+    b = plus(a, 2)
+    puts a  #=> 3
+    puts b  #=> 5
+  
+    - ruby appears to be pass by value, at least with respect to immutable values
+
+
+
+Pass by Reference
+  - by contract, with pass by reference, a reference to an object is passed around
+    - establishes an alias between the argument and the original object: both the 
+      argument and object refer to the same location in memory
+    - if you mutate the argument, you also mutate the original object
+  
+  - ruby appears to use pass by reference when passing mutable objects
+
+    def uppercase(value)
+      value.upcase!
+    end
+
+    name = 'William'
+    uppercase(name)
+    puts name   #=> WILLIAM
+
+
+
+It's References All the Way Down
+  - what exactly is happening when we pass an immutable object?
+
+    def print_id number
+      puts "In method object id = #{number.object_id}"
+    end
+
+    value = 33
+    puts "Outside method object id = ${value.object_id}"
+    print_id value
+
+    #=> 67
+    #=> 67
+
+
+
+Pass By Reference Value
+  - while we can change which object is bound to a variable inside of 
+    a method, we can't change the binding of the original arguments
+    - we can change the objects if the objects are mutable, but the
+      references themselves are immutable as far as the method is concerned
