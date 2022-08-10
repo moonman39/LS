@@ -2,26 +2,26 @@ def prompt(message)
   puts "\n=> #{message}"
 end
 
-def check_user_choice(user_choice)
-  user_choice == 'rock' || user_choice == 'paper' || user_choice == 'scissors'
+def check_user_choice(user)
+  %w(rock paper scissors).include?(user)
 end
 
 def random_computer_choice
   %w(rock paper scissors).sample
 end
 
-def winner_check(user_choice, computer_choice)
-  if user_choice == 'rock' && computer_choice == 'paper'
+def winner_check(user, computer)
+  if user == 'rock' && computer == 'paper'
     'The computer won!'
-  elsif user_choice == 'rock' && computer_choice == 'scissors'
+  elsif user == 'rock' && computer == 'scissors'
     'You won!'
-  elsif user_choice == 'paper' && computer_choice == 'rock'
+  elsif user == 'paper' && computer == 'rock'
     'You won!'
-  elsif user_choice == 'paper' && computer_choice == 'scissors'
+  elsif user == 'paper' && computer == 'scissors'
     'The computer won!'
-  elsif user_choice == 'scissors' && computer_choice == 'rock'
+  elsif user == 'scissors' && computer == 'rock'
     'The computer won!'
-  elsif user_choice == 'scissors' && computer_choice == 'paper'
+  elsif user == 'scissors' && computer == 'paper'
     'You won!'
   else
     'You tied!'
@@ -47,19 +47,20 @@ loop do
   sleep 1.5
   prompt "The computer chose..."
   sleep 1.5
-  prompt "#{computer_choice}"
+  prompt computer_choice.to_s
   sleep 1.5
-  prompt "#{winner_check(user_choice, computer_choice)}"
+  prompt winner_check(user_choice, computer_choice).to_s
 
   sleep 1.5
   play_again = true
   loop do
     prompt "Do you want to play again? (y/n)"
     response = gets.chomp.downcase
-    if response == 'n'
+    case response
+    when 'n'
       play_again = false
       break
-    elsif response == 'y'
+    when 'y'
       break
     end
     prompt "Please enter 'y' or 'n'"
@@ -69,7 +70,3 @@ loop do
 end
 
 prompt "Thanks for playing!"
-  
-  
-
-  
