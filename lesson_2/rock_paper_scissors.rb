@@ -7,7 +7,7 @@ def check_user_choice(user)
   VALID_CHOICES.include?(user)
 end
 
-def winner_check(user, computer)
+def display_result(user, computer)
   if (user == 'rock' && computer == 'paper') ||
       (user == 'paper' && computer == 'scissors') ||
       (user == 'scissors' && computer == 'rock')
@@ -46,7 +46,7 @@ loop do
   sleep 1.5
   prompt computer_choice.to_s
   sleep 1.5
-  prompt winner_check(user_choice, computer_choice).to_s
+  prompt display_result(user_choice, computer_choice).to_s
 
   # Play Again?
   sleep 1.5
