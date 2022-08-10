@@ -9,8 +9,8 @@ end
 
 def win?(first, second)
   (first == 'rock' && second == 'paper') ||
-      (first == 'paper' && second == 'scissors') ||
-      (first == 'scissors' && second == 'rock')
+    (first == 'paper' && second == 'scissors') ||
+    (first == 'scissors' && second == 'rock')
 end
 
 def display_result(user, computer)
@@ -27,7 +27,7 @@ loop do
   # User Choice
   user_choice = nil
   loop do
-    prompt "Choose one: #{VALID_CHOICES.join(", ")}"
+    prompt "Choose one: #{VALID_CHOICES.join(', ')}"
     user_choice = gets.chomp.downcase
     break if check_user_choice(user_choice)
     prompt "Please enter a valid input"
