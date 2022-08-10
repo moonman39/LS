@@ -46,7 +46,7 @@ loop do
   sleep 1.5
   prompt computer_choice.to_s
   sleep 1.5
-  prompt display_result(user_choice, computer_choice).to_s
+  prompt display_result(user_choice, computer_choice)
 
   # Play Again?
   sleep 1.5
