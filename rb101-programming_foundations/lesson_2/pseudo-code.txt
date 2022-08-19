@@ -1,0 +1,102 @@
+Pseudo-Code
+  - when you write programming code, you're writing it for other programs to process
+  - when you write Ruby, you are writing for the Ruby interpreter to process
+
+  - pseudo-code is meant for humans to read
+    - not meant for machines or programs to process, and therefore there's no rigid
+      format to follow
+  
+  - when you approach any problem, it's important to understand it well
+    - in order to do that, you have to spend time to load the problem into your brain
+      - only then can you start to dissect it, understand it, and come up with an execution
+        path to solve it
+  
+  - there are two layers to solving any problem:
+    1) the logical problem domain layer
+    2) the syntactical programming language layer
+
+  - using pseudo-code helps us focus on the logical problem domain layer, without dragging
+    us down to the programming language layer
+
+
+
+Formal Pseudo-Code
+  - we'll use the below keywords to assist us
+    keyword	                  meaning
+
+    START                     start of the program
+    SET                       sets a variable we can use for later
+    GET	                      retrieve input from user
+    PRINT                     displays output to user
+    READ	                    retrieve value from variable
+    IF / ELSE IF / ELSE	      show conditional branches in logic
+    WHILE	                    show looping logic
+    END	                      end of the program
+  
+  - example: 
+
+    START
+
+    # Given a collection of integers called "numbers"
+
+    SET iterator = 1
+    SET saved_number = value within collection at space 1
+
+    WHILE iterator <= length of numbers
+      SET current_number = value within numbers collection at space "iterator"
+      IF saved_number >= current_number
+        go to the next iteration
+      ELSE
+        saved_number = current_number
+      
+      iterator = iterator + 1
+    
+    PRINT saved_number
+
+    END
+
+
+
+Practice Pseudo-Code
+
+1)
+START
+
+# Given two integers called integer_one and integer_two
+
+PRINT number_one + number_two
+
+END
+
+2)
+START
+
+# Given an array of strings called "string_array"
+
+SET joined_strings = string_array concatenated using join method
+
+PRINT joined_strings
+
+END
+
+3)
+START
+
+# Given an array of integers called "integer_array"
+
+SET iterator = 0
+SET new_array = []
+
+WHILE iterator <= length of integer_array
+  IF iterator is an even number
+    push value within integer_array at space "iterator" to new_array
+  ELSE
+    go to the next iteration
+
+  iterator = iterator + 1
+
+PRINT new_array
+
+END
+
+

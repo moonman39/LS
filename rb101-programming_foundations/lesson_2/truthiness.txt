@@ -1,0 +1,113 @@
+Truthiness
+
+- the ability to express "true" or "false is an important concept in any programming language
+  - helps build conditional logic, and understand the state of an object or expression
+  - usually captured in a boolean data type
+
+- boolean
+  - an object whose only purpose is to convey whether it it "true" or "false"
+
+- Ruby booleans
+  - represented by the true and false objects
+  - like everthing else in Ruby, boolean objects also have real classes behind them
+    - can call methods on true and false
+
+  true.class          # => TrueClass
+  true.nil?           # => false
+  true.to_s           # => "true"
+  true.methods        # => list of methods you can call on the true object
+
+  false.class         # => FalseClass
+  false.nil?          # => false
+  false.to_s          # => "false"
+  false.methods       # => list of methods you can call on the false object
+
+- using booleans
+  - you can use the two boolean objects in conditionals
+    - Example 1 : the below will always output 'hi'
+    
+    if true
+      puts 'hi'
+    else
+      puts 'goodbye'
+    end
+
+    - Example 2 : the example below will always output 'goodbye'
+
+    if false
+      puts 'hi'
+    else
+      puts 'goodbye'
+    end
+
+
+
+Expressions and Conditionals
+  - in real code, you won't use the true or false objects directly in a conditional
+    - instead, you'll likely be evaluating some expression or method call in a conditional
+    - Example 3:
+
+    num = 5
+
+    if num < 10
+      puts "small number"
+    else
+      puts "large number"
+    end
+
+    - Example 4:
+    
+    puts "it's true!" if some_method_call
+
+      - the above will output "it's true!" if some_method_call returns a truthy value
+      - when using method calls as a conditional expression in this way, you'll generally
+        want the method to return a boolean rather than relying on the truthiness or
+        falsyness of a non-boolean return value
+
+
+
+Truthiness
+  - truthiness differs from true in that Ruby considers more than the true object to be
+    "truthy"
+      - in fact, Ruby is a very liberal language and considers everything to be truthy
+        other than false and nil
+      - this means that we can use any expression in a conditional, or with logical operators,
+        and as long as it doesn't evaluate to false or nil, it is considered true
+        - an expression that Ruby considers true is not the same as the true object (this is
+          what truthiness means)
+      
+      num = 5
+
+      if num
+        puts "valid number"
+      else
+        puts "error!"
+      end
+
+      - even the number 0 is considered truthy
+      
+  - rubyists take advantage of truthiness in Ruby to write some interesting code
+    - for example, sometimes you'll see assignment in a conditional or logical operator:
+
+    if name = find_name
+      puts "got a name"
+    else
+      puts "couldn't find it"
+    end
+
+    - presumably, the find_name method will return either a valid object, or it will return
+      nil or false
+    - more common, you'll see code like this:
+
+    name = find_name
+
+    if name && name.valid?
+      puts "great name!"
+    else
+      puts "either couldn't find name or it's invalid"
+    end
+
+
+
+KEY TAKEAWAYS
+  - everything in Ruby is considered "truthy" except for false and nil

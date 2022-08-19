@@ -1,0 +1,129 @@
+Collections Basics
+  - collections are made up of individual elements
+
+
+
+Elements Reference
+
+String Element Reference
+  - strings use an integer-based index that represents each character in the string
+    - you can reference a specific character using this index
+
+      str = 'abcdefghi'
+      str[2] #=> 'c'
+    
+    - you can also reference multiple characters within a string by using an index starting
+      point and the number of characters to return
+
+      str[2, 3] #=> 'cde'
+
+      - str [2,3] is actually a call to the slice method of String and is alternative
+        syntax for str.slice(2, 3)
+    
+    - we know that methods in Ruby always have a return value
+      - when we call a method, we can then use method chaining to call another method
+        on the return value
+
+        str[2, 3][0] #=> 'c'
+
+    - quick check:
+
+      str = 'The grass is green'
+      str[4, 5] #=> 'grass'
+    
+  - technically, strings are not true collections
+    - collections contain multiple objects, while strings contain only a single objects
+    - the individual characters are not objects, but are just part of the object the
+      object that contains the string value
+    - strings act like collections in that you can access and assign each character
+      individually
+    - when you access a single character of the string, the return value is a brand new
+      string -- their object id's will be different
+
+
+
+Array Element Reference
+  - arrays are ordered, zero-indexed collections
+
+  - arrays are lists of elements that are ordered by index, where each element can be
+    any object
+
+    arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+
+    arr[2] # => "c"
+
+
+
+Hash Element Reference
+  hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot' }
+
+  hsh['fruit']    # => "apple"
+  hsh['fruit'][0] # => "a"
+
+  - when initializing a has, the keys must be unique
+    - values, however, can be duplicated
+  
+  - it is common practice to use symbols as the keys
+    - symbols in Ruby can be thought of as immutable strings
+
+
+
+Element Reference Gotchas
+
+Out of Bounds Indices
+  - both arrays and strings can be thought of as indexed collections
+  - referencing an out-of-bounds index returns nil
+
+#fetch
+  - can be used to differentiate between nil as an element in an array or an invalid
+    index
+
+    a = [1, 2, 3]
+
+    a[3] #=> nil
+    a.fetch(3) #=> IndexError
+  
+  - can also be used for Hash Keys
+    hsh = { :a => 1, 'b' => 'two', :c => nil }
+
+    hsh['b']       # => "two"
+    hsh[:c]        # => nil
+    hsh['c']       # => nil
+    hsh[:d]        # => nil
+
+    hsh.fetch(:c)  # => nil
+    hsh.fetch('c') # => KeyError: key not found: "c"
+                  #        from (irb):2:in `fetch'
+                  #        from (irb):2
+                  #        from /usr/bin/irb:11:in `<main>'
+    hsh.fetch(:d)  # => KeyError: key not found: :d
+                  #        from (irb):3:in `fetch'
+                  #        from (irb):3
+                  #        from /usr/bin/irb:11:in `<main>'
+
+
+
+Conversion
+  - the fact that strings and arrays share similarities lends itself to being able to
+    convert from one to the other
+  
+  - there are a number of Ruby methods that facilitate this type of conversion including
+    #chars and #join
+    - String#chars returns an array of individual characters
+
+      str = 'Practice'
+
+      arr = str.chars # => ["P", "r", "a", "c", "t", "i", "c", "e"]
+    
+    - Array#join returns a string with the elements of the array joined together
+
+      arr.join # => "Practice"
+
+  - Hash has a #to_a method, which returns an array
+
+    hsh = { sky: 'blue', grass: 'green' }
+    hash.to_a   #=> [[:sky, "blue"], [:grass, "green"]]
+
+    - each sub-array is equivalent to a key-value pair from the initial hash
+  
+  - just like Hash has a #to_a method, Array has as #to_h method

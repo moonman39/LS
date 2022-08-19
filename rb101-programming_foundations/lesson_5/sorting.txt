@@ -1,0 +1,14 @@
+Sorting
+  - sorting is mostly performed on arrays; since items in arrays are 
+    accessed via their index  
+
+
+The <=> Method
+  - sometimes referred to as the 'spaceship' operator
+
+  - any object in a collection that we want to sort must implement a <=> method
+    - performs comparison between two objects of the same type and returns
+      a -1, 0, or 1 depending on whether the first object is less than, equal to,
+      or greater than the second object
+    - the return value of <=> is used by sort to determine the order in which
+      to place the items

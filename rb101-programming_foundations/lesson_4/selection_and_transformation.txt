@@ -1,0 +1,58 @@
+Selection and Transformation
+  - Selection is picking certain elements out of the collection depending
+    on some criterion
+    - if there are n elements in a collection, selection results in n or
+      less elements
+  - Transformation refers to manipulating every element in the colleciton
+    - always results in exactly n elements
+  
+  - selection and transformation both utilize the basics of looping: a loop,
+    a counter, a way to retrieve the current value, and a way to exit the
+    loop
+  
+  - selection and transformation require some critiera
+    - selection uses this criteria to determine which elements are selected
+    - transformation uses this criteria to deterime how to performe the
+      transformation
+
+
+
+Looping to Select and Transform
+
+  alphabet = 'abcdefghijklmnopqrstuvwxyz'
+  selected_chars = ''
+  counter = 0
+
+  loop do
+    current_char = alphabet[counter]
+
+    if current_char == 'g'
+      selected_chars << current_char
+    end
+
+    counter += 1
+    break if counter == alphabet.size
+  end
+
+
+
+Extracting to Methods
+  - most of the time, selecting or transforming a collection is a very specific
+    action, which naturally lends the specific action being extracted into 
+    convenience methods
+
+
+def double_numbers(numbers)
+  counter = 0
+
+  loop do
+    break if counter == numbers.size
+
+    current_number = numbers[counter]
+    numbers[counter] = current_number * 2
+
+    counter += 1
+  end
+
+  numbers
+end

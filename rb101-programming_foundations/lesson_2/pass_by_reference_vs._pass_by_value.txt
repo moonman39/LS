@@ -1,0 +1,58 @@
+Pass by Reference vs. Pass by value
+  - in most programming languages, there are two ways of dealing with objects passed
+    into methods
+    - you can either treat these arguments as 'references' to the original objects
+      or as 'values', which are copies of the original 
+
+
+
+What does pass by 'value' mean?
+  - in C, when you 'pass by value', the method only has a copy of the original object
+    - operations performed on the object within the method have no effect on the original
+      outside of the method
+  - some rubyists say Ruby is 'pass by value' because re-assigning the object within the
+    method doesn't affect the object outside the method
+    - example:
+
+      def change_name(name)
+        name = 'bob'
+      end
+
+      name = 'jim'
+      change_name(name)
+      puts name   #-> jim
+
+
+
+What does pass by 'reference' mean?
+  - it's not quite that simple
+    - if Ruby was pure 'pass by value', that means there should be no way for operations
+      within a method to cause changes to the original object (you can):
+
+        def cap(str)
+          str.captailze!
+        end
+
+        name = 'jim'
+        cap name
+        puts name   #-> Jim
+
+    - this implies that Ruby is 'pass by reference', because operations within the method
+      affected the original object
+      - however, not all operations affect the original object
+
+        def cap(str)
+          str.capitalize
+        end
+
+        name = 'jim'
+        cap name
+        puts name   #-> jim
+
+
+
+What Ruby does
+  - Ruby exhibits a combination of behaviors from both 'pass by reference' as well as 'pass
+    by value'
+  - the most important concept to remember is when an operation within the method mutates
+    the caller, it will affect the original object

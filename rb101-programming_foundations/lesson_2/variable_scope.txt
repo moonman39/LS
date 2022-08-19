@@ -1,0 +1,165 @@
+Variable Scope
+Variable Scope
+  - the two major areas where we encounter local variable scoping rules are related
+    to method definition and method invocation with a block
+
+
+
+Variables and Blocks
+  - block example
+
+    [1, 2, 3].each do |num|
+      puts num
+    end
+
+    - the part of the code that we call the block is the part following the method
+      invocation
+    - the do..end can be replaced by {..} if its on a single line
+  
+  - the block following the method invocation is actually an argument being passed 
+    into the method
+  
+  - blocks create a new scope for local variables
+    - can think of the scope created by a block following a method invocation as an 
+      inner scope
+    - nested blocks will create nested scopes
+    - a variable's scope is determined by where it is initialized
+    - example 1: outer scope variables can be accessed by inner scope
+
+      a = 1
+
+      loop do
+        puts a
+        a += 1
+        break
+      end
+
+      puts a #=> 2
+
+      - inner scope can access outer scope variables
+      - you can change variables from an inner scope and have that change affect
+        the outer scope
+        - when we instantiate variables in an inner scope, we have to be careful that
+          we're not accidentally re-assigning an existing variable in an outer scope
+    - example 2: inner scope variables cannot be accessed in outer scope
+
+      loop do
+        b = 1
+        break
+      end
+
+      puts b
+
+    - example 3: peer scopes do not conflict
+
+      2.times do
+        a = 'hi'
+        puts a
+      end
+
+      loop do
+        puts a    #=> undefined local variable
+        break
+      end
+
+      puts a      #=> undefined local variable
+
+      - peer blocks cannot reference variables initialized in other blocks
+    
+    - example 4: nested blocks
+
+      a = 1
+
+      loop do
+        b = 2
+
+        loop do
+          c = 3
+          puts a
+          puts b
+          puts c
+          break
+        end
+
+        puts a
+        puts b
+        puts c    #=> NameError
+        break
+      end
+
+      puts a
+      puts b    #=> NameError
+      puts c    #=> NameError
+    
+    - example 5: variable shadowing
+      - happens with blocks that take paremeters
+
+      n = 10
+
+      1.times do |n|
+        n = 11
+      end
+
+      puts n    #=> 10
+
+
+
+Variable and Method Definitions
+  - while a block can access variables that were initialized outside of the block, a method
+    cannot -- its scope is self-contained
+    - methods can only access variables that were initialized inside the method or that
+      are defined as parameters (only talking about local variables for now)
+  
+  - a method definition has no notion of "outer" or "inner" scope -- you must explicitly
+    pass in any parameters to a method definition
+  
+  - example 1: a method definition can't access local variables in another scope
+
+    a = 'hi'
+
+    def some_method
+      puts a
+    end
+
+    some_method   #=> NameError
+  
+  - example 2: a method definition can access objects passed in
+
+    def some_method(a)
+      puts a
+    end
+
+    some_method(5)
+
+
+
+Blocks within Method Definitions
+  - unsurprisingly, the rules of scope for a method invocation with a block
+    remain in full effect even if we're working inside a method definition
+
+    def some_method
+      a = 1
+      5.times do
+        puts a
+        b = 2
+      end
+
+      puts a
+      puts b
+    end
+
+    some_method   #=> NameError: undefined local variable or method 'b'
+
+
+
+Constants
+  - constants behave like globals
+
+    USERNAME = 'Batman'
+
+    def authetnicate
+      puts "Logging in #{USERNAME}"
+    end
+
+    authenticate    #=> Logging in Batman
+

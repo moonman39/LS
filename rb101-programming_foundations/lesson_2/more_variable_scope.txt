@@ -1,0 +1,137 @@
+More Variable Scope
+
+
+Method Definition
+  - when, within our code, we define a Ruby method using the def keyword
+
+    def greeting
+      puts 'Hello'
+    end
+
+
+
+Method Invocation
+  - when we call a method, whether that happens to be an existing method from the core
+    Ruby API or core Library, or a custom methodthat we've defined ourselves using the
+    def kework
+
+      greeting    #-> calling the greeting method outputs "hello"
+  
+  - we've seen many examples of methods being called with blocks
+
+    [1, 2, 3].each do { |num| puts num }
+
+    - technically, any method can be called with a block, but the block is only executed
+      if the method is defined in a particular way
+  
+  - a block is part of the method invocation
+    - method invocation followed by curly braces or do..end is the way in which we define
+      a block in Ruby
+  
+  - blocks
+    - the block acts as an argument to the method
+    - in the same way that a local variable can be passed as an argument to a method at 
+      invocation, when a method is called with a block, the block acts as an argument to
+      that method
+  
+  - the way that an argument is used, whether it is a method parameter or a block, depends
+    on how the method is defined
+    - example 1: method parameter not used
+
+      def greeting(str)
+        puts "Goodbye"
+      end
+
+      word = "hello"
+
+      greetings(word)   #-> Outputs "Goodbye"
+    
+    - example 2: method parameter used
+
+      def greetings(str)
+        puts str
+        puts "Goodbye"
+      end
+
+      word = "Hello"
+
+      greetings(word)
+    
+    - example 3: block not executed
+
+      def greetings
+        puts 'Goodbye'
+      end
+
+      word = 'hello'
+      
+      greetings do
+        puts word
+      end
+
+      #-> 'Goodbye'
+    
+    - example 4: block executed
+
+      def greetings
+        yield
+        puts 'Goodbye'
+      end
+
+      word = 'hello'
+
+      greetings do
+        puts word
+      end
+
+      #->  'Hello'
+      #->  'Goodbye
+
+      - in example 3 the greetings method is invoked with a block, but the method is not
+        defined to use a block in any way and so the block is not executed
+      - in example 3, the yield keyword is what controls the interaction with the block
+        - in this case it executes the block one
+    
+    - when invoking a method with a block, we aren't just limited to executing code
+      within the block
+        - depending on the method definition, the method can use the return value of 
+          the block to perform some other action
+
+            a = 'hello'
+
+            [1, 2, 3].map { |num| a }   #-> ['hello', 'hello', 'hello']
+
+
+
+Review
+  - method definitions cannot directly access local variables initialized outside of the
+    method definition, nor can local variables initialized outside of the method 
+    definition be reassigned from within it
+  - a block can access local variables initialized outside of the block and can reassign
+    those variables
+  - methods can access local variables passed in as arguments, and can access local
+    variables through interaction with blocks
+  - given this context, we can think of method definition as setting a certain scope
+    for any local variables in terms of the parameters that the method definition has,
+    what it does with those parameters, and also how it interacts (if at all) with
+    a block
+  - we can think of method invocation as using the scope set by the method definition
+    - if the method is defined to use a block, then the scope of the block can
+      provide additional flexiblity in terms of how the method invocation interacts
+      with its surroundings
+
+
+
+
+
+
+
+
+
+
+
+KEY TAKEAWAYS
+  - a block passed with a method serves as an argument for that method
+      
+      
+      
