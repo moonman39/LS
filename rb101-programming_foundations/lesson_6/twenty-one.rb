@@ -94,21 +94,7 @@ def blackjack?(card_set)
   total(card_set) == 21
 end
 
-def dealer_check player_cards, dealer_cards
-  if blackjack?(dealer_cards)
-    prompt "Blackjack!"
-    true
-  elsif busted?(dealer_cards)
-    prompt "The Dealer busted!"
-    true
-  elsif total(dealer_cards) > total(player_cards)
-    true
-  elsif total(dealer_cards) >= 17
-    true
-  end
-end
-
-def game_break? card_set
+def game_break?(card_set)
   if busted?(card_set)
     prompt "Busted!"
     true
@@ -120,10 +106,12 @@ def game_break? card_set
   end
 end
 
-def who_won? player_cards, dealer_cards
-  if busted?(player_cards) || (total(player_cards) < total(dealer_cards) && !busted?(dealer_cards))
+def who_won?(player_cards, dealer_cards)
+  if busted?(player_cards) ||
+     (total(player_cards) < total(dealer_cards) && !busted?(dealer_cards))
     prompt "The Dealer won!"
-  elsif busted?(dealer_cards) || total(player_cards) > total(dealer_cards)
+  elsif busted?(dealer_cards) ||
+        total(player_cards) > total(dealer_cards)
     prompt "You won!"
   elsif total(player_cards) == total(dealer_cards)
     prompt "It's a tie!"
@@ -178,7 +166,8 @@ loop do
   display_dealer_hand(dealer_cards) unless busted?(player_cards)
   sleep 2
   loop do
-    break if game_break?(dealer_cards) || total(dealer_cards) >= 17 || busted?(player_cards)
+    break if game_break?(dealer_cards) ||
+             total(dealer_cards) >= 17 || busted?(player_cards)
 
     deal(dealer_cards, deck)
     display_dealer_hand(dealer_cards)
