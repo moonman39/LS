@@ -1,5 +1,3 @@
-# Figure out how to display the winner - you may have to refactor a bit
-
 SUITS = ['H', 'D', 'S', 'C']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King',
           'Ace']
@@ -29,6 +27,7 @@ end
 def deal(card_set, deck)
   card_set << random_card(deck)
   prompt "The Dealer delt a #{card_set.last}"
+  sleep 2
 end
 
 def hit_or_stay
@@ -122,7 +121,7 @@ def game_break? card_set
 end
 
 def who_won? player_cards, dealer_cards
-  if busted?(player_cards) || total(player_cards) < total(dealer_cards)
+  if busted?(player_cards) || (total(player_cards) < total(dealer_cards) && !busted?(dealer_cards))
     prompt "The Dealer won!"
   elsif busted?(dealer_cards) || total(player_cards) > total(dealer_cards)
     prompt "You won!"
@@ -134,6 +133,7 @@ end
 def play_again?
   play_again = true
   loop do
+    sleep 2
     prompt "Do you want to play again? (y/n)"
     response = gets.chomp.downcase
     if response.start_with?('y')
@@ -148,6 +148,7 @@ end
 
 # Gameplay
 loop do
+  system 'clear'
   deck = initialize_deck
   player_cards = []
   dealer_cards = []
