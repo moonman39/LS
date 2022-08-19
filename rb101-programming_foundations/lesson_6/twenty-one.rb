@@ -28,6 +28,7 @@ end
 
 def deal(card_set, deck)
   card_set << random_card(deck)
+  prompt "The Dealer delt a #{card_set.last}"
 end
 
 def hit_or_stay
@@ -120,6 +121,16 @@ def game_break? card_set
   end
 end
 
+def who_won? player_cards, dealer_cards
+  if busted?(player_cards) || total(player_cards) < total(dealer_cards)
+    prompt "The Dealer won!"
+  elsif busted?(dealer_cards) || total(player_cards) > total(dealer_cards)
+    prompt "You won!"
+  elsif total(player_cards) == total(dealer_cards)
+    prompt "It's a tie!"
+  end
+end
+
 def play_again?
   play_again = true
   loop do
@@ -163,10 +174,10 @@ loop do
     sleep 2
   end
 
-  display_dealer_hand(dealer_cards)
+  display_dealer_hand(dealer_cards) unless busted?(player_cards)
   sleep 2
   loop do
-    break if game_break?(dealer_cards) || total(dealer_cards) >= 17
+    break if game_break?(dealer_cards) || total(dealer_cards) >= 17 || busted?(player_cards)
 
     deal(dealer_cards, deck)
     display_dealer_hand(dealer_cards)
@@ -175,6 +186,7 @@ loop do
 
   sleep 2
 
+  who_won?(player_cards, dealer_cards)
   break if !play_again?
 end
 
